@@ -18,6 +18,8 @@ Built natively for **Google Antigravity** (with backwards compatibility for Clau
 - [Visual Design: With & Without Flow](#-visual-design-with--without-flow)
 - [Sound Design & Audio Engineering](#-sound-design--audio-engineering)
 - [Installation & Quick Start](#-installation--quick-start)
+  - [🤖 One-Prompt Agent Installation](#-one-prompt-agent-installation-antigravity--claude-code)
+  - [💻 Manual Installation](#-manual-installation)
 - [Directory Structure](#-directory-structure)
 - [License & Commercial Rights](#-license--commercial-rights)
 
@@ -130,7 +132,39 @@ ffmpeg -i mix.wav -af ebur128=peak=true -f null -
 
 ## 🚀 Installation & Quick Start
 
-### 1. Prerequisites
+### 🤖 One-Prompt Agent Installation (Antigravity & Claude Code)
+
+If you are using an AI coding agent (**Google Antigravity**, **Claude Code**, etc.), you do not need to manually configure folders or run CLI copy scripts.
+
+Simply copy and paste this prompt directly into your agent chat:
+
+```text
+Please install the Vox Doc skills globally from https://github.com/nirajan-khatiwada/VOX-DESIGN.git:
+
+1. Clone or download the repository into a temporary directory if not already available locally.
+2. Install both skills globally so they work in any chat:
+   - For Antigravity:
+     - Copy `skills/vox-doc/` to `~/.gemini/config/skills/vox-doc/` (Windows: `C:\Users\<me>\.gemini\config\skills\vox-doc\`).
+     - Copy `skills/vox-doc-sound/` to `~/.gemini/config/skills/vox-doc-sound/` (Windows: `C:\Users\<me>\.gemini\config\skills\vox-doc-sound\`).
+   - For Claude Code (if running under Claude):
+     - Copy `skills/vox-doc/` to `~/.claude/skills/vox-doc/`.
+     - Copy `skills/vox-doc-sound/` to `~/.claude/skills/vox-doc-sound/`.
+   (Note: Preserve any existing `.env`, `SETUP_STATUS.md`, `CATALOG.tsv`, or custom sounds).
+3. Verify environment prerequisites:
+   - Python 3.11+ and FFmpeg (with libass enabled).
+   - Core libraries: run `python -m pip install numpy pillow scipy soundfile faster-whisper`.
+4. Check that both `SKILL.md` files are in place, read `vox-doc/SKILL.md`, and ask me what topic I would like to create my first documentary about!
+```
+
+> **If you already opened or unzipped this repository locally:**  
+> In your agent chat, simply type:  
+> `start` (or: `"Read GEMINI.md in this folder and follow it"`). The agent will automatically detect [GEMINI.md](file:///c:/Users/Nirajan/Downloads/lastone/vox-doc/GEMINI.md) / [AGENTS.md](file:///c:/Users/Nirajan/Downloads/lastone/vox-doc/AGENTS.md) and handle global installation and setup immediately.
+
+---
+
+### 💻 Manual Installation
+
+#### 1. Prerequisites
 - **Python 3.11–3.13** (3.12 recommended)
 - **FFmpeg with `libass`** (Full build)
   - Windows: `winget install Gyan.FFmpeg`
@@ -141,19 +175,22 @@ ffmpeg -i mix.wav -af ebur128=peak=true -f null -
   python -m pip install numpy pillow scipy soundfile faster-whisper
   ```
 
-### 2. Global Antigravity Installation
-Clone or copy this repository:
+#### 2. Copy Skills to Global Config
 ```bash
-# Windows PowerShell
+# Windows PowerShell (Antigravity)
 Copy-Item -Path "skills\vox-doc" -Destination "$HOME\.gemini\config\skills\vox-doc" -Recurse -Force
 Copy-Item -Path "skills\vox-doc-sound" -Destination "$HOME\.gemini\config\skills\vox-doc-sound" -Recurse -Force
+
+# Linux / macOS (Antigravity)
+cp -r skills/vox-doc ~/.gemini/config/skills/vox-doc
+cp -r skills/vox-doc-sound ~/.gemini/config/skills/vox-doc-sound
 ```
 
-### 3. Start Creating
-In any Antigravity conversation, simply type:
+#### 3. Start Creating
+In **any** Antigravity conversation or project, simply type:
 - `"vox doc start"` — Begin a new documentary.
 - `"vox doc continue"` — Resume a project from its last checkpoint.
-- Or provide a topic: `"Create a Vox doc about the history of the Suez Canal"`.
+- Or provide a topic: `"Create a Vox doc about why India has one time zone"`.
 
 ---
 
